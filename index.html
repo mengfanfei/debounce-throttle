@@ -21,6 +21,7 @@
     <button id="btn">取消防抖</button>
     <script src="https://cdn.bootcss.com/underscore.js/1.9.1/underscore.js"></script>
     <script src="./debounce.js"></script>
+    <script src="./throttle.js"></script>
     <script>
         //演示事件如何频繁发生的
         let count = 0;
@@ -40,7 +41,7 @@
             doSome.cancel()
         }
 
-        container.onmousemove = doSome;
+        // container.onmousemove = doSome;
 
         //防抖：
         //事件响应函数在一段时间后才执行，如果在这段时间内在次调用，则重新计算执行时间，当预定的时间内没有在此调用该函数，则执行响应逻辑
@@ -54,6 +55,15 @@
 
         //节流
         //如果你持续触发事件，每隔一段时间，只执行一次事件
+        //应用场景：
+        // 1.dom元素的拖拽
+        // 2.射击游戏
+        // 3.计算鼠标移动的距离
+        // 4.监听scroll滚动事件
+        container.onmousemove = throttle(doSomeThing, 2000, {
+            leading: true,
+            trailing: false
+        })
     </script>
 </body>
 </html>
